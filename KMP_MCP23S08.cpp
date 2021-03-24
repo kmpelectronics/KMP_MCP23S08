@@ -1,8 +1,22 @@
 /*!
  * @file KMP_MCP23S08.cpp
+ *
+ * This is a library for the the MCP23S08 SPI expander
+ *
+ * This library can work with every Arduino device and KMP Electronics use it together its devices:
+ * ----> https://kmpelectronics.eu/products/prodino-wifi-esp-wroom-02-v1/
+ * ----> https://kmpelectronics.eu/products/prodino-esp32-v1/
+ *
+ * This is an Arduino library which allows you use MCP23S08 SPI based
+ * I/O port expander through methods: digitalWrite, digitalRead and pinMode.
  * 
+ * KMP Electronics invests time and resources providing this open source code,
+ * please support KMP Electronics and open-source hardware by purchasing
+ * products from KMP Electronics!
+ *
+ * Written by Plamen Kovandzhiev for KMP Electronics Ltd.
+ * It is licensed under the MIT License, see LICENSE.txt.
  */
-
 
 #include "KMP_MCP23S08.h"
 
@@ -25,6 +39,7 @@
 KMP_MCP23S08::KMP_MCP23S08(byte csPin) : _csPin(csPin) {}
 
 KMP_MCP23S08::KMP_MCP23S08(byte csPin, byte deviceAddr) : _csPin(csPin) {
+	// Attention! It is not fully checked.
 	_deviceOpcode |= ((deviceAddr & 0x03) << 1);
 }
 
@@ -57,7 +72,7 @@ void KMP_MCP23S08::write(byte pin, bool state) {
 	setOutput((getOutput() & ~(1 << pin)) | (state << pin));
 }
 
-void KMP_MCP23S08::setPinMode(byte pin, byte mode) {
+void KMP_MCP23S08::pinMode(byte pin, byte mode) {
 	if (pin >= MCP23S08_PIN_COUNT) {
 		return;
 	}
@@ -130,10 +145,10 @@ byte KMP_MCP23S08::readRegister(byte address) {
 
 void KMP_MCP23S08::beginTransaction() {
 	SPI.beginTransaction(SPISettings(CLOCK, BIT_ORDER, DATA_MODE));
-	digitalWrite(_csPin, LOW);
+	write(_csPin, LOW);
 }
 
 void KMP_MCP23S08::endTransaction() {
-	digitalWrite(_csPin, HIGH);
+	write(_csPin, HIGH);
 	SPI.endTransaction();
 }
