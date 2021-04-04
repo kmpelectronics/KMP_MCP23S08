@@ -1,12 +1,21 @@
 /*!
  * @file KMP_MCP23S08.h
- * 
+ *
  * This is a library for the MCP23S08 SPI expander
+ *
+ * This library can work with every Arduino device and KMP Electronics use it together its devices:
+ * ----> https://kmpelectronics.eu/products/prodino-wifi-esp-wroom-02-v1/
+ * ----> https://kmpelectronics.eu/products/prodino-esp32-v1/
+ *
+ * This is an Arduino library which allows you use MCP23S08 SPI based
+ * I/O port expander through methods: digitalWrite, digitalRead and pinMode.
  * 
- * This library for the Arduino IDE allows the simple usage of the MCP23S08 SPI based
- * I/O port expander by providing functions like digitalWrite, digitalRead and pinMode.
+ * KMP Electronics invests time and resources providing this open source code,
+ * please support KMP Electronics and open-source hardware by purchasing
+ * products from KMP Electronics!
+ *
+ * Written by Plamen Kovandzhiev for KMP Electronics Ltd. contact@kmpelectronics.eu
  * It is licensed under the MIT License, see LICENSE.txt.
- * 
  */
  
 #ifndef KMP_MCP23S08_H
@@ -26,7 +35,7 @@ public:
 	KMP_MCP23S08(byte csPin);
 
 	/*!
-	 * @brief Crate an instance of KMP_MCP23S08
+	 * @brief Crate an instance of KMP_MCP23S08. Attention! It is not fully checked
 	 * @param csPin Chip select pin
 	 * @param deviceAddr Describe a device address
 	 */	
@@ -39,8 +48,8 @@ public:
 	
 	/*!
 	 * @brief Read curent pin state. The pin can be from 0 to MCP23S08_PIN_COUNT -1
-	 * @param pin The pin number.
-	 * @return true if it in 1 or false
+	 * @param pin The pin number
+	 * @return true for 1 and false for 0
 	 */
 	bool read(byte pin);
 
@@ -56,47 +65,47 @@ public:
 	 * @param pin The pin number. It can be from 0 to MCP23S08_PIN_COUNT -1
 	 * @param mode Pin mode can be: INPUT, OUTPUT and INPUT_PULLUP
 	 */
-	void setPinMode(byte pin, byte mode);
-	
-	/*!
-	* @brief Set pins in output state
-	* @param state State describe every pin state
-	*/
-	void setOutput(byte state);
+	void pinMode(byte pin, byte mode);
 
 	/*!
-	 * @brief Set pins in mode
-	 * @param mode Mode can be: INPUT, OUTPUT and INPUT_PULLUP
+	 * @brief Configure every pin mode separately Input or Output
+	 * @param mode Every bit of the byte represent one pin. 1 for Input and 0 for Output
 	 */
 	void setMode(byte mode);
 
 	/*!
-	 * @brief Set pins in pullup mode state
-	 * @param state State per pin
+	 * @brief Get all pins mode Input or Output.
+	 * @return Every bit of the byte represent one pin. 1 for Input and 0 for Output
 	 */
-	void setPullup(byte state);
+	byte getMode();
 	
 	/*!
-	 * @brief Get all pins input state
-	 * @return All pins input state
+	* @brief Set pins in output state High or Low
+	* @param state Every bit of the byte represent one pin. 1 for High and 0 for Low
+	*/
+	void setOutput(byte state);
+
+	/*!
+	 * @brief Get all pins output state High or Low. Every bit of the byte represent one pin.
+	 * @return All pins output state. 1 for High and 0 for Low
+	 */
+	byte getOutput();
+	
+	/*!
+	 * @brief Get all pins input state. Every bit of the byte represent one pin.
+	 * @return All pins input state. 1 for High and 0 for Low
 	 */
 	byte getInput();
 
 	/*!
-	 * @brief Get all pins output state
-	 * @return All pins output state
+	 * @brief Set pins in pullup mode state. Every bit of the byte represent one pin.
+	 * @param state State per pin. 1 = Pull-up enabled and 0 = Pull-up disabled
 	 */
-	byte getOutput();
-
-	/*!
-	 * @brief Get all pins mode
-	 * @return All pins pins mode
-	 */
-	byte getMode();
+	void setPullup(byte state);
 
 	/*!
 	 * @brief Get all pins pullup state
-	 * @return All pins pullup state
+	 * @return Every bit of the byte represent one pin. 1 = Pull-up enabled and 0 = Pull-up disabled
 	 */
 	byte getPullup();
 	
