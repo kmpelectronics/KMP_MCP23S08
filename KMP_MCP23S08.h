@@ -1,7 +1,7 @@
 /*!
  * @file KMP_MCP23S08.h
  *
- * This is a library for the the MCP23S08 SPI expander
+ * This is a library for the MCP23S08 SPI expander
  *
  * This library can work with every Arduino device and KMP Electronics use it together its devices:
  * ----> https://kmpelectronics.eu/products/prodino-wifi-esp-wroom-02-v1/
@@ -14,7 +14,7 @@
  * please support KMP Electronics and open-source hardware by purchasing
  * products from KMP Electronics!
  *
- * Written by Plamen Kovandzhiev for KMP Electronics Ltd.
+ * Written by Plamen Kovandzhiev for KMP Electronics Ltd. contact@kmpelectronics.eu
  * It is licensed under the MIT License, see LICENSE.txt.
  */
  

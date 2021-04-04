@@ -1,0 +1,31 @@
+###########################################
+# Syntax Coloring Map For KMP MCP23S08 library
+###########################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+KMP_MCP23S08	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+read	KEYWORD2
+write	KEYWORD2
+pinMode	KEYWORD2
+setMode	KEYWORD2
+getMode	KEYWORD2
+setOutput	KEYWORD2
+getOutput	KEYWORD2
+getInput	KEYWORD2
+setPullup	KEYWORD2
+getPullup	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+MCP23S08_PIN_COUNT	LITERAL1
