@@ -109,6 +109,11 @@ public:
 	 */
 	byte getPullup();
 	
+	/*!
+	 * @brief Reset all registers
+	 */
+	void reset();
+	
 private:
 	byte _csPin;
 	byte _deviceOpcode = 0x40;

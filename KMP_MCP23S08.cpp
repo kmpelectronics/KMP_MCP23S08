@@ -14,7 +14,7 @@
  * please support KMP Electronics and open-source hardware by purchasing
  * products from KMP Electronics!
  *
- * Written by Plamen Kovandzhiev for KMP Electronics Ltd.
+ * Written by Plamen Kovandzhiev for KMP Electronics Ltd. contact@kmpelectronics.eu
  * It is licensed under the MIT License, see LICENSE.txt.
  */
 
@@ -48,12 +48,6 @@ void KMP_MCP23S08::begin() {
 
 	// Start SPI
 	SPI.begin();
-	
-	// Reset all registers
-	writeRegister(IODIR, 0xFF);
-	for (byte i = IPOL; i <= OLAT; i++) {
-		writeRegister(i, 0x00);
-	}
 }
 
 bool KMP_MCP23S08::read(byte pin) {
@@ -151,4 +145,11 @@ void KMP_MCP23S08::beginTransaction() {
 void KMP_MCP23S08::endTransaction() {
 	write(_csPin, HIGH);
 	SPI.endTransaction();
+}
+
+void KMP_MCP23S08::reset() {
+	writeRegister(IODIR, 0xFF);
+	for (byte i = IPOL; i <= OLAT; i++) {
+		writeRegister(i, 0x00);
+	}
 }
